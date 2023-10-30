@@ -1,0 +1,36 @@
+{% extends 'base.html'%} {% block content %}
+<div class="container">
+  <form action="">
+    <div class="mb-3">
+      <label class="form-label">Cari Makanan:</label>
+      <input type="text" name="nama" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  {% if searchMakanan %} Pencarian untuk <strong>{{ searchMakanan }}</strong>
+  {% endif %}
+  <br />
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for makanan in makanans %}
+    <div class="col">
+      <div class="card">
+        <img alt="" class="card-img-top" src="{{ makanan.gambar.url }}" />
+        <div class="card-body">
+          <h5 class="card-title fw-bold">
+            {{ makanan.nama }} </h5>
+          <p class="card-text">
+            Harga : Rp{{ makanan.harga }}
+            <br />
+            Stok : {{ makanan.stok }}            
+            <br />
+            <a href="{% url 'detail' makanan.id %}">
+              <h5 class="card-title fw-bold">Detail</h5>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

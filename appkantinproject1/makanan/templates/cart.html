@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thread>
+            <tr>
+                <th>Item</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+                <th>Sub Total</th>
+                <th>Aksi</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.makanan.nama }}</td>
+                <td>Rp{{ item.makanan.harga }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.item_total }}</td>
+                <td>
+                    {% if item.makanan.id %}
+                        <a href="{% url 'remove_from_cart' item.makanan.id %}">
+                            <button class="btn btn-danger">Hapus</button>
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<p>Total : Rp{{ total_price }}</p>
+
+{% endblock content %}
